@@ -1,22 +1,43 @@
-const form = document.getElementById('form');
-form.addEventListener('submit', handleSubmit)
 
-const inputvalue = document.getElementById('value-real');
+const form = document.getElementById('form');
+const inputValue = document.getElementById('value-real');
 const selectCurrency = document.getElementById('currency');
 const result = document.getElementById('result');
-let selectedConverted = 0;
 
-function handleSubmit(event) {
-    event.preventDefault();
+// Mapeamento de símbolos — fácil de estender
+const symbols = {
+    USD: 'US$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    AUD: 'A$',
+    CAD: 'C$',
+    CHF: 'CHF',
+    CNY: '¥'
+};
 
-    const value = inputvalue.value;
+form.addEventListener('submit', handleSubmit);
+
+// Atualiza automaticamente a cada 60s se já houver valor e moeda
+setInterval(() => {
+    const val = inputValue.value;
+    const cur = selectCurrency.value;
+    if (val && cur) converter(val, cur);
+}, 60_000);
+
+function handleSubmit(e) {
+    e.preventDefault();
+
+    // Converte “1,23” → “1.23” e força número
+    const raw = inputValue.value.replace(',', '.');
+    const value = parseFloat(raw);
     const currency = selectCurrency.value;
 
     if (!value || value <= 0 || isNaN(value)) {
         alert('Por favor, insira um valor válido.');
         return;
     }
-    else if (!currency) {
+    if (!currency) {
         alert('Por favor, selecione uma moeda.');
         return;
     }
@@ -24,54 +45,44 @@ function handleSubmit(event) {
     converter(value, currency);
 }
 
-function converter(value, currency) {
-    let convertedValue;
+async function converter(value, currency) {
+    const url = `https://economia.awesomeapi.com.br/last/${currency}-BRL`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-    switch (currency) {
-        case 'USD':
-            convertedValue = (value / 5.25).toFixed(2);
-            result.innerHTML = `US$ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'EUR':
-            convertedValue = (value / 6.00).toFixed(2);
-            result.innerHTML = `€ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'GBP':
-            convertedValue = (value / 7.00).toFixed(2);
-            result.innerHTML = `£ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'JPY':
-            convertedValue = (value / 0.04).toFixed(2);
-            result.innerHTML = `¥ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'AUD':
-            convertedValue = (value / 3.80).toFixed(2);
-            result.innerHTML = `A$ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'CAD':
-            convertedValue = (value / 4.00).toFixed(2);
-            result.innerHTML = `C$ ${convertedValue}`;
-            animateResult()
-            break;
-        case 'CHF':
-            convertedValue = (value / 5.50).toFixed(2);
-            result.innerHTML = `CHF ${convertedValue}`;
-            animateResult()
-            break;
-        case 'CNY':
-            convertedValue = (value / 0.80).toFixed(2);
-            result.innerHTML = `¥ ${convertedValue}`;
-            animateResult()
-            break;
+        // Ex: pair = "USDBRL", bid/ask em R$ por 1 USD
+        const pair = `${currency}BRL`;
+        const rate = parseFloat(data[pair].ask);
+
+        // Real → moeda estrangeira (divide R$ por preço da moeda)
+        const converted = (value / rate).toFixed(2);
+
+        // Símbolo ou fallback para o próprio código
+        const symbol = symbols[currency] || currency;
+
+        result.innerText = `${symbol} ${converted}`;
+        animateResult();
+
+    } catch (err) {
+        alert('Erro ao buscar cotação. Tente novamente mais tarde.');
+        console.error(err);
     }
 
-    inputvalue.value = '';
+    // Opcional: limpa o campo
+    inputValue.value = '';
 }
+
+function animateResult() {
+    result.animate(
+        [
+            { transform: 'translateY(-20px)', opacity: 0 },
+            { transform: 'translateY(0)', opacity: 1 }
+        ],
+        { duration: 400, easing: 'ease-out' }
+    );
+}
+
 
 function animateResult() {
     return result.animate([
@@ -79,5 +90,7 @@ function animateResult() {
         { transform: 'translateY(0px)', opacity: 1 }
     ], { duration: 500, easing: 'ease-out' });
 }
+
+
 
 

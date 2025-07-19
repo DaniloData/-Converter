@@ -1,0 +1,31 @@
+@media screen and (max-width: 550px) {
+
+    /* Força o container a empilhar verticalmente */
+    .input-container {
+        flex-direction: column !important;
+        align-items: stretch;
+        /* faz cada item ocupar toda a largura */
+        justify-content: center;
+        gap: 16px;
+        /* espaçamento entre os campos */
+        width: 100%;
+        /* ocupa toda a largura disponível */
+        box-sizing: border-box;
+        margin-top: 5%;
+        /* manteve seu espaçamento */
+        margin-bottom: 8%;
+    }
+
+    /* Cada grupo (label + campo) ocupa 100% do container */
+    .input-container .form-group {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Se quiser dar um espaçamento interno nos inputs/selects */
+    .input-container .form-group input,
+    .input-container .form-group select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
