@@ -1,31 +1,42 @@
-@media screen and (max-width: 550px) {
+@media (max-width: 450px) {
 
-    /* Força o container a empilhar verticalmente */
-    .input-container {
-        flex-direction: column !important;
-        align-items: stretch;
-        /* faz cada item ocupar toda a largura */
-        justify-content: center;
-        gap: 16px;
-        /* espaçamento entre os campos */
-        width: 100%;
-        /* ocupa toda a largura disponível */
-        box-sizing: border-box;
-        margin-top: 5%;
-        /* manteve seu espaçamento */
-        margin-bottom: 8%;
-    }
-
-    /* Cada grupo (label + campo) ocupa 100% do container */
-    .input-container .form-group {
-        width: 100%;
+    header,
+    footer {
+        width: 100vw;
         margin: 0;
+        padding: 0;
     }
 
-    /* Se quiser dar um espaçamento interno nos inputs/selects */
-    .input-container .form-group input,
-    .input-container .form-group select {
+    .input-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .input-container input,
+    .input-container select {
+        width: 90%;
+    }
+
+    form {
         width: 100%;
-        box-sizing: border-box;
+        padding: 0 5%;
+    }
+
+    form button {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    main #result {
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    footer p {
+        font-size: 0.75em;
+        padding: 10px;
+        text-align: center;
     }
 }
