@@ -1,15 +1,23 @@
-header {
+.faixa {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #5aba8d;
     padding: 20px;
 }
 
-header h1 {
-    color: #fff;
+.titulo {
+    flex: 1;
     text-align: center;
-    cursor: pointer;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
 }
 
-header h1:hover {
-    color: #112629;
+.icone {
+    color: #b4e1e8;
+    font-size: 28px;
+    text-decoration: none;
 }

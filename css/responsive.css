@@ -1,42 +1,81 @@
-@media (max-width: 450px) {
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    header,
-    footer {
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-    }
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
 
+.header {
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #27ae60;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #2ecc71;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #2ecc71;
+}
+
+@media (max-width: 550px) {
     .input-container {
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
     }
 
-    .input-container input,
-    .input-container select {
-        width: 90%;
-    }
-
-    form {
+    .form-group {
         width: 100%;
-        padding: 0 5%;
-    }
-
-    form button {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    main #result {
-        font-size: 2.5em;
-        text-align: center;
-    }
-
-    footer p {
-        font-size: 0.75em;
-        padding: 10px;
-        text-align: center;
+        margin-bottom: 20px;
     }
 }

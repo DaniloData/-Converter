@@ -14,15 +14,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/bc405c6144.js" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
 
-    <header>
-        <h1>$DevConverter</h1>
-    </header>
+    <div class="faixa">
+        <div class="titulo">$DevConverter</div>
+        <a href="https://github.com/DaniloData" target="_blank" class="icone">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    </div>
 
-    <main>
+
+    <main class="container">
         <form id="form">
             <section class="input-container">
                 <div class="form-group">
@@ -32,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Escolha a moeda</label>
+                    <label for="currency">Escolha a moeda</label>
                     <select id="currency">
                         <option value="" disabled selected>Selecione uma moeda</option>
                         <option value="USD">Dólar (USD)</option>
@@ -50,15 +56,14 @@
             <button type="submit">Converter</button>
         </form>
 
-        <h2 id="result"> $$$$ </h2>
+        <h2 id="result">$$$$</h2>
     </main>
 
-    <footer>
+    <footer class="footer">
         <span>
-            &copy; Desenvolvido por Danilo Castelo Dos Santos Ramos, 2025 - Todos os direitos reservados.
+            © Desenvolvido por Danilo Castelo Dos Santos Ramos, 2025 - Todos os direitos reservados.
         </span>
     </footer>
-
 
     <script src="./script.js"></script>
 </body>
